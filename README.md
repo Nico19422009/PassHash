@@ -19,3 +19,53 @@ Challenge your friends to see if they can break the hash!
 ⚠ Disclaimer: This tool is for educational and testing purposes only. Do not use it for illegal activities!
 
 Have fun hacking – ethically, of course! 😎💻
+
+📖 How to Run
+Follow these steps to set up and run the Password Generator & Security Tester on your system.
+
+🛠 Installation
+Clone the repository
+
+sh
+Kopieren
+Bearbeiten
+git clone https://github.com/yourusername/password-generator.git  
+cd password-generator  
+Ensure Python is installed
+
+This script requires Python 3.x.
+Check if Python is installed:
+sh
+Kopieren
+Bearbeiten
+python --version  
+If Python is not installed, download it from python.org.
+🚀 Running the Script
+Run the script in the terminal or command prompt:
+
+sh
+Kopieren
+Bearbeiten
+python password_generator.py  
+🔧 Usage
+Choose a mode:
+
+SelfMade → Enter your own password and hash it.
+Custom → Generate a random secure password.
+For Custom Mode:
+
+Set password length.
+Choose complexity (letters, numbers, special characters).
+Decide if you want a word tip for the generated password.
+Select a hashing algorithm:
+
+MD5
+SHA-256
+SHA-512
+Get your hashed password and test its security!
+
+⚠ Note: This tool is for educational and security testing purposes only. Do not use it for illegal activities! I am not responsible for any illegal activities with this tool!
+
+What will be coming soon? 
+
+-An GUI to Have an cute little design as an exe programm!
