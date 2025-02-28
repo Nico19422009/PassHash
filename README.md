@@ -26,26 +26,20 @@ Follow these steps to set up and run the Password Generator & Security Tester on
 🛠 Installation
 Clone the repository
 
-sh
-Kopieren
-Bearbeiten
+
 git clone https://github.com/yourusername/password-generator.git  
 cd password-generator  
 Ensure Python is installed
 
 This script requires Python 3.x.
 Check if Python is installed:
-sh
-Kopieren
-Bearbeiten
+
 python --version  
 If Python is not installed, download it from python.org.
 🚀 Running the Script
 Run the script in the terminal or command prompt:
 
-sh
-Kopieren
-Bearbeiten
+
 python password_generator.py  
 🔧 Usage
 Choose a mode:
