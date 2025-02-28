@@ -27,7 +27,7 @@ Follow these steps to set up and run the Password Generator & Security Tester on
 Clone the repository
 
 
-git clone https://github.com/yourusername/password-generator.git  
+git clone https://github.com/Nico19422009/PassHash  
 cd password-generator  
 Ensure Python is installed
 
