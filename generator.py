@@ -2,9 +2,8 @@ import hashlib
 import random
 import string
 
-
-#Logo
-logo = r"""                           Made By:Nico Jerema M
+# ASCII-Logo mit Titel "PASS HASH"
+logo = r"""
 $$$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\        $$\   $$\  $$$$$$\   $$$$$$\  $$\   $$\ 
 $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$\       $$ |  $$ |$$  __$$\ $$  __$$\ $$ |  $$ |
 $$ |  $$ |$$ /  $$ |$$ /  \__|$$ /  \__|      $$ |  $$ |$$ /  $$ |$$ /  \__|$$ |  $$ |
@@ -14,32 +13,19 @@ $$ |      $$ |  $$ |$$\   $$ |$$\   $$ |      $$ |  $$ |$$ |  $$ |$$\   $$ |$$ |
 $$ |      $$ |  $$ |\$$$$$$  |\$$$$$$  |      $$ |  $$ |$$ |  $$ |\$$$$$$  |$$ |  $$ |
 \__|      \__|  \__| \______/  \______/       \__|  \__|\__|  \__| \______/ \__|  \__|
                               Secure Password Hasher v1.0
-
-""" 
-
+"""
 print(logo)
 
+def generate_password(length, complexity):
+    chars = string.ascii_lowercase
+    if complexity >= 2:
+        chars += string.ascii_uppercase
+    if complexity >= 3:
+        chars += string.digits
+    if complexity >= 4:
+        chars += string.punctuation
 
-
-
-
-def generate_password(length, complexity, word_tip=False):
-    chars = ""
-    if complexity == 1:
-        chars = string.ascii_lowercase
-    elif complexity == 2:
-        chars = string.ascii_letters
-    elif complexity == 3:
-        chars = string.ascii_letters + string.digits
-    elif complexity == 4:
-        chars = string.ascii_letters + string.digits + string.punctuation
-    password = "".join(random.choice(chars) for _ in range(length))
-    
-    if word_tip and length > 4:
-        tip_length = min(4, length // 2)
-        print(f"Word Tip: {password[:tip_length]}...")
-    
-    return password
+    return "".join(random.choice(chars) for _ in range(length))
 
 def hash_password(password, hash_type):
     if hash_type == "MD5":
@@ -51,26 +37,29 @@ def hash_password(password, hash_type):
     else:
         return "Unsupported hash type!"
 
-def main():
-    print("Password Generator")
-    mode = input("Choose mode (SelfMade/Custom): ")
-    
-    if mode.lower() == "selfmade":
-        password = input("Enter your password: ")
-    elif mode.lower() == "custom":
-        length = int(input("Enter password length: "))
-        complexity = int(input("Choose complexity (1-4): "))
-        word_tip_choice = input("With a word tip? (yes/no): ").strip().lower()
-        word_tip = word_tip_choice == "yes"
-        password = generate_password(length, complexity, word_tip)
-        print("Generated password: ", "*" * len(password))  # Versteckt die Ausgabe
-    else:
-        print("Invalid mode!")
-        return
-    
-    hash_type = input("Choose hash type (MD5/SHA-256/SHA-512): ")
-    hashed_password = hash_password(password, hash_type.upper())
-    print("Hashed Password: ", hashed_password)
+def save_hash_to_file(hash_value, mode):
+    filename = "Shash1.txt" if mode == "selfmade" else "Chash.txt"
+    with open(filename, "a") as file:
+        file.write(hash_value + "\n")
+    print(f"\nHash gespeichert in {filename} ✅")
 
-if __name__ == "__main__":
-    main()
+# Benutzeroptionen
+mode = input("Wähle Modus (SelfMade/Custom): ").strip().lower()
+if mode == "selfmade":
+    password = input("Gib dein Passwort ein: ")
+else:
+    length = int(input("Länge des Passworts: "))
+    complexity = int(input("Komplexität (1=Einfach, 4=Max): "))
+    password = generate_password(length, complexity)
+
+# Passwort anzeigen
+print("\nDein Passwort:")
+print("*" * len(password))  # Versteckte Ausgabe
+
+# Hashing
+hash_type = input("Wähle Hash-Algorithmus (MD5/SHA-256/SHA-512): ").strip().upper()
+hashed_pw = hash_password(password, hash_type)
+print(f"\nGehashtes Passwort ({hash_type}): {hashed_pw}")
+
+# Speichere den Hash in die passende Datei
+save_hash_to_file(hashed_pw, mode)
