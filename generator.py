@@ -107,6 +107,8 @@ style = {
     "font": ("Helvetica", 12)
 }
 
+
+
 tk.Label(root, text=lang["mode_label"], **style).grid(row=0, column=0, sticky="w")
 mode_var = tk.StringVar(value="selfmade")
 tk.Radiobutton(root, text=lang["selfmade"], variable=mode_var, value="selfmade", command=toggle_fields, **style).grid(row=0, column=1, sticky="w")
@@ -135,7 +137,7 @@ tk.Button(root, text=lang["generate_button"], command=generate_and_hash, **style
 
 hashed_pw_label = tk.Label(root, text="", **style)
 hashed_pw_label.grid(row=6, column=0, columnspan=3)
-
+ 
 toggle_fields()  # Initialize the fields based on the default mode
 
 root.mainloop()
