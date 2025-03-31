@@ -32,13 +32,47 @@ def save_hash_to_file(hash_value, mode):
         file.write(hash_value + "\n")
     messagebox.showinfo("Info", f"Hash gespeichert in {filename} ✅")
 
+def validate_inputs(mode, length=None, complexity=None, password=None):
+    """
+    Validates user inputs based on the selected mode.
+
+    Parameters:
+        mode (str): The selected mode ("selfmade" or "custom").
+        length (int): The length of the password (for "custom" mode).
+        complexity (int): The complexity level of the password (for "custom" mode).
+        password (str): The user-provided password (for "selfmade" mode).
+
+    Returns:
+        bool: True if all inputs are valid, False otherwise.
+    """
+    if mode == "selfmade":
+        if not password or len(password.strip()) == 0:
+            messagebox.showerror("Error", "Password cannot be empty!")
+            return False
+    elif mode == "custom":
+        if length is None or length <= 0:
+            messagebox.showerror("Error", "Password length must be a positive number!")
+            return False
+        if complexity is None or complexity < 1 or complexity > 4:
+            messagebox.showerror("Error", "Complexity must be between 1 and 4!")
+            return False
+    else:
+        messagebox.showerror("Error", "Invalid mode selected!")
+        return False
+
+    return True
+
 def generate_and_hash():
     mode = mode_var.get()
     if mode == "selfmade":
         password = password_entry.get()
+        if not validate_inputs(mode, password=password):
+            return
     else:
         length = int(length_entry.get())
         complexity = int(complexity_var.get())
+        if not validate_inputs(mode, length=length, complexity=complexity):
+            return
         password = generate_password(length, complexity)
 
     hash_type = hash_type_var.get()
